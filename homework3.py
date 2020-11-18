@@ -59,14 +59,12 @@ def gaussMethod(A, b, x):
     check = isDominant(A, n)
     if(check):
         while(itr < 25):
-            x_old = x
-            for i in range(n):
-                sigma = 0
-                for j in range(i-1):
-                    sigma = sigma+A[i][j]*x[j]
-                for j in range(i+1, n):
-                    sigma = sigma+A[i][j]*x_old[j]
-                x[i] = (1/A[i][i])*(b[i]-sigma)
+            for i in range(0, n):
+                sigma = b[i]
+                for j in range(0, n):
+                    if(j != i):
+                        sigma -= A[i][j]*x[j]
+                x[i] = sigma/A[i][i]
                 print('current :', x)
             itr = itr+1
         print('Solution of the system is :', x)
