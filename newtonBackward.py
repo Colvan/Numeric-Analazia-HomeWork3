@@ -7,8 +7,8 @@ def newtonBackward(x, y, value):
 
     # len of x
     n = len(x)
-# calculating factorial of given number n
 
+# calculating factorial of given number n
     def fact(n):
         f = 1
         for i in range(2, n + 1):
