@@ -5,7 +5,18 @@ def func(x):
     return x*x - 4*math.sin(x)
 
 
-a = 1
-b = 3
-#bisection(a, b, func)
-bisection2(a, b, func)
+def func2(x):
+    return (x*x*x*x)-(x*x*x)-(3*x*x)
+
+
+def func3(x):
+    return(x*x*x)-x-1
+
+
+a = -3
+b = 2
+# big range
+bisection2(a, b, func2)
+
+# small range
+# bisection2(a, b, func2)
