@@ -35,12 +35,12 @@ def jacobiMethod(A, b, x):
         while(stop):
             xold = x.copy()
             for i in range(n):
+                print('current :', x[::-1])
                 sigma = 0
                 for j in range(n):
                     if(i != j):
                         sigma = sigma+A[i][j]*xold[j]
-                x[i] = (1/A[i][i])*(b[i]-sigma)
-                print('current :', x)
+                x[i] = (b[i]-sigma)/(A[i][i])
             itr = itr+1
             if(abs((x[0]-xold[0])) < epsilon):
                 stop = False
@@ -66,13 +66,13 @@ def gaussMethod(A, b, x):
     if(check):
         while(stop):
             xold = x.copy()
+            print('current :', x[::-1])
             for i in range(0, n):
                 sigma = b[i]
                 for j in range(0, n):
                     if(j != i):
                         sigma -= A[i][j]*x[j]
                 x[i] = sigma/A[i][i]
-                print('current :', x)
             itr = itr+1
             if(abs((x[0]-xold[0])) < epsilon):
                 stop = False
