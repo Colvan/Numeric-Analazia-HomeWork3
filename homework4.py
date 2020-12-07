@@ -45,17 +45,19 @@ def AllRangeCheck(aLeft, bRight, func, der):
     run = 0.1
     a = aLeft
     b = bRight
+    checks = []
     while(aLeft < bRight):
         if (func(aLeft)*func(aLeft+run) < 0):
             root = bisection1(aLeft, aLeft+run, func)
             print("The value of root is : ", "%f" % root)
-        if(func(aLeft) == 0.0):
-            root_check = derCheck(a, b, der)
-            for i in range(len(root_check)):
-                if(func(root_check[i]) == 0):
-                    print("The value of root is : ", "%f" % root_check[i])
+            checks.append(aLeft+run)
         aLeft += run
         aLeft = round(aLeft, 1)
+    for i in range(0, len(checks), 2):
+        root_check = derCheck(float(checks[i]), float(checks[1]), der)
+        for i in range(len(root_check)):
+            if(func(root_check[i]) == 0):
+                print("The value of root is : ", "%f" % root_check[i])
 
 
 def func(x):
