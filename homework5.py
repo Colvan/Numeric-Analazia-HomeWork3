@@ -6,14 +6,17 @@ import inspect
 def NewtonRaphson(func, derivFunc, x):
     epsilon = 0.0001
     itr = 0
-    h = func(x) / derivFunc(x)
-    while abs(h) >= epsilon:
-        h = func(x)/derivFunc(x)
-        x = x - h
+    while True:
+        if(derivFunc(x) == 0):
+            break
         itr += 1
-    print("The value of the root is : ", "%.4f" % x)
-    print("number of iterations: ", "%d" % itr)
-    return x
+        x1 = x - (func(x)/derivFunc(x))
+        t = abs(x1-x)
+        x = x1
+        if(t < epsilon):
+            break
+    print('Required root is: %0.3f' % x)
+    print('iterations: %d' % itr)
 
 
 def SecantMethod(func, x0, x1, itr):
@@ -31,7 +34,7 @@ def SecantMethod(func, x0, x1, itr):
         if step > itr:
             break
         condition = abs(func(x2)) > epsilon
-    print('Required root is: %0.8f' % x2)
+    print('Required root is: %0.3f' % x2)
     print('iterations: %d' % step)
 
 
@@ -43,5 +46,23 @@ def der(x):
     return (4*(x**3))+(3*(x**2))-6*x
 
 
-NewtonRaphson(func, der, -20)
-SecantMethod(func, -3, 2, 20)
+# NewtonRaphson(func, der, 10)
+# SecantMethod(func, -3, 2, 100)
+
+
+def run(left, right, func, der):
+    arr1 = []
+    arr2 = []
+    for i in range(left, right):
+        if (func(i) * func(i + 1)) < 0 or (func(i) * func(i + 1)) == 0:
+            arr1.append((i, i + 1))
+            arr2.append((i, i + 1))
+    print("----------------NEWTON RAPHSON METHOD-----------------------")
+    for i in arr1:
+        NewtonRaphson(func, der, i[0])
+    print("-------------------------Secant METHOD----------------------")
+    for i in arr2:
+        SecantMethod(func, i[0], i[1], 100)
+
+
+run(-3, 2, func, der)
