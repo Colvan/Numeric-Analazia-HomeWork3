@@ -51,18 +51,14 @@ def der(x):
 
 
 def run(left, right, func, der):
-    arr1 = []
-    arr2 = []
+    print("----------------NEWTON RAPHSON METHOD-----------------------")
     for i in range(left, right):
         if (func(i) * func(i + 1)) < 0 or (func(i) * func(i + 1)) == 0:
-            arr1.append((i, i + 1))
-            arr2.append((i, i + 1))
-    print("----------------NEWTON RAPHSON METHOD-----------------------")
-    for i in arr1:
-        NewtonRaphson(func, der, i[0])
-    print("-------------------------Secant METHOD----------------------")
-    for i in arr2:
-        SecantMethod(func, i[0], i[1], 100)
+            NewtonRaphson(func, der, i)
+    print("--------------------SECANT METHOD-----------------------")
+    for i in range(left, right):
+        if (func(i) * func(i + 1)) < 0 or (func(i) * func(i + 1)) == 0:
+            SecantMethod(func, i, i+1, 100)
 
 
 run(-3, 2, func, der)
